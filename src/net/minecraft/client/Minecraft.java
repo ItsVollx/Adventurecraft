@@ -10,6 +10,7 @@ import java.awt.Graphics;
 import java.io.File;
 import net.minecraft.src.AchievementList;
 import net.minecraft.src.AC_GuiTMI;
+import net.minecraft.src.AC_Mod;
 import net.minecraft.src.AxisAlignedBB;
 import net.minecraft.src.Block;
 import net.minecraft.src.ChunkCoordinates;
@@ -282,6 +283,7 @@ public abstract class Minecraft implements Runnable {
 		this.renderEngine.registerTextureFX(new TextureLavaFlowFX());
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(0));
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(1));
+		AC_Mod.init();
 		this.renderGlobal = new RenderGlobal(this, this.renderEngine);
 		GL11.glViewport(0, 0, this.displayWidth, this.displayHeight);
 		this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);

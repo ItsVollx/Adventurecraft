@@ -9,7 +9,7 @@ public class EntityList {
 	private static Map IDtoClassMapping = new HashMap();
 	private static Map classToIDMapping = new HashMap();
 
-	private static void addMapping(Class var0, String var1, int var2) {
+	public static void addMapping(Class var0, String var1, int var2) {
 		stringToClassMapping.put(var1, var0);
 		classToStringMapping.put(var0, var1);
 		IDtoClassMapping.put(Integer.valueOf(var2), var0);
