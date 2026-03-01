@@ -1,0 +1,17 @@
+# Build outputs
+bin/
+out/
+*.class
+adventurecraft-mod.jar
+build.log
+
+# IDE
+.idea/
+*.iml
+
+# Temp files
+out.txt
+compile-files.txt
+src_files.txt
+TestIconIndex.class
+TestIconIndex.java
