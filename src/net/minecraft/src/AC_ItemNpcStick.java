@@ -5,7 +5,7 @@ public class AC_ItemNpcStick extends Item {
 	public AC_ItemNpcStick(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acNpcStick");
+		this.setItemName("npcStick");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

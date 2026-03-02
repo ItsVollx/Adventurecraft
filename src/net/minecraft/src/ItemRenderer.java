@@ -20,11 +20,13 @@ public class ItemRenderer {
 	public void renderItem(EntityLiving var1, ItemStack var2) {
 		GL11.glPushMatrix();
 		if(var2.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[var2.itemID].getRenderType())) {
-			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
+			int texNumHeld = Block.blocksList[var2.itemID].getTextureNum();
+			GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(texNumHeld == 0 ? "/terrain.png" : "/terrain" + texNumHeld + ".png"));
 			this.renderBlocksInstance.renderBlockOnInventory(Block.blocksList[var2.itemID], var2.getItemDamage(), var1.getEntityBrightness(1.0F));
 		} else {
 			if(var2.itemID < 256) {
-				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/terrain.png"));
+				int texNumHeld2d = Block.blocksList[var2.itemID] != null ? Block.blocksList[var2.itemID].getTextureNum() : 0;
+				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture(texNumHeld2d == 0 ? "/terrain.png" : "/terrain" + texNumHeld2d + ".png"));
 			} else {
 				GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.mc.renderEngine.getTexture("/gui/items.png"));
 			}

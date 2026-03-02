@@ -22,29 +22,29 @@ public class AC_Items {
 	public static Item itemUmbrella;
 	public static Item itemWrench;
 
+	// Icon indices match original ACBin.jar positions in gui/items.png
+	// Textures are pre-baked in the original items.png atlas - no runtime injection needed
+
 	public static void init() {
-		// Raw IDs 400+ (shiftedIndex = 656+)
-		// Icon indices: using various vanilla item textures as placeholders
-		// iconIndex = col + row * 16 in items.png
-		itemBomb        = new AC_ItemBomb(400).setIconIndex(8 + 0 * 16);       // gunpowder
-		itemBoomerang   = new AC_ItemBoomerang(401).setIconIndex(5 + 3 * 16);  // stick
-		itemBrush       = new AC_ItemBrush(402).setIconIndex(5 + 1 * 16);      // gold ingot
-		itemCursor      = new AC_ItemCursor(403).setIconIndex(7 + 0 * 16);     // iron ingot
-		itemEraser      = new AC_ItemEraser(404).setIconIndex(13 + 1 * 16);    // flint
-		itemHammer      = new AC_ItemHammer(405).setIconIndex(2 + 3 * 16);     // iron axe
-		itemHookshot    = new AC_ItemHookshot(406).setIconIndex(4 + 2 * 16);   // fishing rod
-		itemLantern     = new AC_ItemLantern(407).setIconIndex(5 + 0 * 16);    // torch-like
-		itemNpcStick    = new AC_ItemNpcStick(408).setIconIndex(5 + 3 * 16);   // stick
-		itemPaintBucket = new AC_ItemPaintBucket(409).setIconIndex(10 + 4 * 16); // bucket
-		itemPaste       = new AC_ItemPaste(410).setIconIndex(11 + 4 * 16);     // water bucket
-		itemPistol      = new AC_ItemPistol(411).setIconIndex(5 + 2 * 16);     // bow
-		itemPowerGlove  = new AC_ItemPowerGlove(412).setIconIndex(0 + 0 * 16); // diamond
-		itemQuill       = new AC_ItemQuill(413).setIconIndex(6 + 3 * 16);      // feather
-		itemRifle       = new AC_ItemRifle(414).setIconIndex(5 + 2 * 16);      // bow
-		itemShotgun     = new AC_ItemShotgun(415).setIconIndex(5 + 2 * 16);    // bow
-		itemTriggerStick= new AC_ItemTriggerStick(416).setIconIndex(4 + 5 * 16); // blaze rod
-		itemUmbrella    = new AC_ItemUmbrella(417).setIconIndex(5 + 3 * 16);   // stick
-		itemWrench      = new AC_ItemWrench(418).setIconIndex(2 + 3 * 16);     // iron axe
+		itemBomb        = new AC_ItemBomb(400).setIconIndex(150);
+		itemBoomerang   = new AC_ItemBoomerang(401).setIconIndex(144);
+		itemBrush       = new AC_ItemBrush(402).setIconIndex(225);
+		itemCursor      = new AC_ItemCursor(403).setIconIndex(224);
+		itemEraser      = new AC_ItemEraser(404).setIconIndex(226);
+		itemHammer      = new AC_ItemHammer(405).setIconIndex(228);
+		itemHookshot    = new AC_ItemHookshot(406).setIconIndex(163);
+		itemLantern     = new AC_ItemLantern(407).setIconIndex(180);
+		itemNpcStick    = new AC_ItemNpcStick(408).setIconIndex(53);
+		itemPaintBucket = new AC_ItemPaintBucket(409).setIconIndex(227);
+		itemPaste       = new AC_ItemPaste(410).setIconIndex(231);
+		itemPistol      = new AC_ItemPistol(411).setIconIndex(192);
+		itemPowerGlove  = new AC_ItemPowerGlove(412).setIconIndex(177);
+		itemQuill       = new AC_ItemQuill(413).setIconIndex(229);
+		itemRifle       = new AC_ItemRifle(414).setIconIndex(193);
+		itemShotgun     = new AC_ItemShotgun(415).setIconIndex(194);
+		itemTriggerStick= new AC_ItemTriggerStick(416).setIconIndex(53);
+		itemUmbrella    = new AC_ItemUmbrella(417).setIconIndex(179);
+		itemWrench      = new AC_ItemWrench(418).setIconIndex(230);
 
 		System.out.println("[AdventureCraft] Registered " + 19 + " items (IDs 400-418)");
 	}

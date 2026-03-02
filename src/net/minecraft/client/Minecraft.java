@@ -107,6 +107,7 @@ import org.lwjgl.util.glu.GLU;
 public abstract class Minecraft implements Runnable {
 	public static byte[] field_28006_b = new byte[10485760];
 	private static Minecraft theMinecraft;
+	public static Minecraft minecraftInstance;
 	public PlayerController playerController;
 	private boolean fullscreen = false;
 	private boolean hasCrashed = false;
@@ -181,6 +182,7 @@ public abstract class Minecraft implements Runnable {
 		}
 
 		theMinecraft = this;
+		minecraftInstance = this;
 	}
 
 	public void onMinecraftCrash(UnexpectedThrowable var1) {
@@ -283,7 +285,7 @@ public abstract class Minecraft implements Runnable {
 		this.renderEngine.registerTextureFX(new TextureLavaFlowFX());
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(0));
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(1));
-		AC_Mod.init();
+		AC_Mod.init(this.renderEngine);
 		this.renderGlobal = new RenderGlobal(this, this.renderEngine);
 		GL11.glViewport(0, 0, this.displayWidth, this.displayHeight);
 		this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);

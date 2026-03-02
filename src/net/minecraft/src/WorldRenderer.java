@@ -105,45 +105,72 @@ public class WorldRenderer {
 				boolean var13 = false;
 				boolean var14 = false;
 
-				for(int var15 = var2; var15 < var5; ++var15) {
-					for(int var16 = var3; var16 < var6; ++var16) {
-						for(int var17 = var1; var17 < var4; ++var17) {
-							int var18 = var9.getBlockId(var17, var15, var16);
-							if(var18 > 0) {
-								if(!var14) {
-									var14 = true;
-									GL11.glNewList(this.glRenderList + var11, GL11.GL_COMPILE);
-									GL11.glPushMatrix();
-									this.setupGLTranslation();
-									float var19 = 1.000001F;
-									GL11.glTranslatef((float)(-this.sizeDepth) / 2.0F, (float)(-this.sizeHeight) / 2.0F, (float)(-this.sizeDepth) / 2.0F);
-									GL11.glScalef(var19, var19, var19);
-									GL11.glTranslatef((float)this.sizeDepth / 2.0F, (float)this.sizeHeight / 2.0F, (float)this.sizeDepth / 2.0F);
-									tessellator.startDrawingQuads();
-									tessellator.setTranslationD((double)(-this.posX), (double)(-this.posY), (double)(-this.posZ));
-								}
+				// Multi-atlas rendering: loop over textureNum (0=terrain.png, 2=terrain2.png, 3=terrain3.png)
+				for(int texNum = 0; texNum <= 3; ++texNum) {
+					if(texNum == 1) continue; // skip textureNum 1 (unused)
 
-								if(var11 == 0 && Block.isBlockContainer[var18]) {
-									TileEntity var23 = var9.getBlockTileEntity(var17, var15, var16);
-									if(TileEntityRenderer.instance.hasSpecialRenderer(var23)) {
-										this.tileEntityRenderers.add(var23);
+					boolean tessStarted = false;
+
+					for(int var15 = var2; var15 < var5; ++var15) {
+						for(int var16 = var3; var16 < var6; ++var16) {
+							for(int var17 = var1; var17 < var4; ++var17) {
+								int var18 = var9.getBlockId(var17, var15, var16);
+								if(var18 > 0) {
+									// Skip blocks that don't match the current texture atlas pass
+									if(texNum != Block.blocksList[var18].getTextureNum()) {
+										continue;
+									}
+
+									if(!var14) {
+										var14 = true;
+										GL11.glNewList(this.glRenderList + var11, GL11.GL_COMPILE);
+										GL11.glPushMatrix();
+										this.setupGLTranslation();
+										float var19 = 1.000001F;
+										GL11.glTranslatef((float)(-this.sizeDepth) / 2.0F, (float)(-this.sizeHeight) / 2.0F, (float)(-this.sizeDepth) / 2.0F);
+										GL11.glScalef(var19, var19, var19);
+										GL11.glTranslatef((float)this.sizeDepth / 2.0F, (float)this.sizeHeight / 2.0F, (float)this.sizeDepth / 2.0F);
+									}
+
+									if(!tessStarted) {
+										tessStarted = true;
+										// Bind the correct texture atlas for this pass
+										if(texNum == 0) {
+											GL11.glBindTexture(GL11.GL_TEXTURE_2D, net.minecraft.client.Minecraft.minecraftInstance.renderEngine.getTexture("/terrain.png"));
+										} else {
+											GL11.glBindTexture(GL11.GL_TEXTURE_2D, net.minecraft.client.Minecraft.minecraftInstance.renderEngine.getTexture("/terrain" + texNum + ".png"));
+										}
+										tessellator.startDrawingQuads();
+										tessellator.setTranslationD((double)(-this.posX), (double)(-this.posY), (double)(-this.posZ));
+									}
+
+									if(var11 == 0 && Block.isBlockContainer[var18]) {
+										TileEntity var23 = var9.getBlockTileEntity(var17, var15, var16);
+										if(TileEntityRenderer.instance.hasSpecialRenderer(var23)) {
+											this.tileEntityRenderers.add(var23);
+										}
+									}
+
+									Block var24 = Block.blocksList[var18];
+									int var20 = var24.getRenderBlockPass();
+									if(var20 != var11) {
+										var12 = true;
+									} else if(var20 == var11) {
+										var13 |= var10.renderBlockByRenderType(var24, var17, var15, var16);
 									}
 								}
-
-								Block var24 = Block.blocksList[var18];
-								int var20 = var24.getRenderBlockPass();
-								if(var20 != var11) {
-									var12 = true;
-								} else if(var20 == var11) {
-									var13 |= var10.renderBlockByRenderType(var24, var17, var15, var16);
-								}
 							}
+						}
+
+						// Draw tessellator after each Y-level to allow texture switching between atlas passes
+						if(tessStarted) {
+							tessellator.draw();
+							tessStarted = false;
 						}
 					}
 				}
 
 				if(var14) {
-					tessellator.draw();
 					GL11.glPopMatrix();
 					GL11.glEndList();
 					tessellator.setTranslationD(0.0D, 0.0D, 0.0D);

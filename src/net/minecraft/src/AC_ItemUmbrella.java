@@ -8,7 +8,7 @@ public class AC_ItemUmbrella extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(256);
-		this.setItemName("acUmbrella");
+		this.setItemName("umbrella");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

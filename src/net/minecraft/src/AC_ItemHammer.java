@@ -5,7 +5,7 @@ public class AC_ItemHammer extends Item {
 	public AC_ItemHammer(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acHammer");
+		this.setItemName("hammer");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

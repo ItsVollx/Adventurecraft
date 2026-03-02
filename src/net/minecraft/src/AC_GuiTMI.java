@@ -284,6 +284,22 @@ public class AC_GuiTMI extends GuiContainer {
 				GL11.glEnable(GL11.GL_DEPTH_TEST);
 
 				String name = ("" + StringTranslate.getInstance().translateNamedKey(stack.getItemName())).trim();
+				if (name.length() == 0) {
+					// No translation found - use raw item name (strip "item." / "tile." prefix)
+					String rawName = stack.getItemName();
+					if (rawName != null && rawName.length() > 0) {
+						if (rawName.startsWith("item.")) {
+							name = rawName.substring(5);
+						} else if (rawName.startsWith("tile.")) {
+							name = rawName.substring(5);
+						} else {
+							name = rawName;
+						}
+						if (name.length() > 0) {
+							name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+						}
+					}
+				}
 				if (name.length() > 0) {
 					tooltipText = name + " (#" + stack.itemID + ")";
 					tooltipX = mouseX + 12;

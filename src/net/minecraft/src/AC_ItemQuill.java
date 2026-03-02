@@ -5,7 +5,7 @@ public class AC_ItemQuill extends Item {
 	public AC_ItemQuill(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acQuill");
+		this.setItemName("quill");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

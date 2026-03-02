@@ -7,7 +7,7 @@ public class AC_ItemShotgun extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(MAX_AMMO);
-		this.setItemName("acShotgun");
+		this.setItemName("shotgun");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

@@ -4,7 +4,7 @@ public class AC_BlockCamera extends AC_BlockTrigger {
 
 	public AC_BlockCamera(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acCamera");
+		this.setBlockName("camera");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

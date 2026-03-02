@@ -5,7 +5,7 @@ public class AC_ItemTriggerStick extends Item {
 	public AC_ItemTriggerStick(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acTriggerStick");
+		this.setItemName("triggerStick");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

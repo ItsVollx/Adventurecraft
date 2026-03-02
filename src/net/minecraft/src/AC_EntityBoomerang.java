@@ -1,5 +1,6 @@
 package net.minecraft.src;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AC_EntityBoomerang extends Entity {
@@ -8,6 +9,10 @@ public class AC_EntityBoomerang extends Entity {
 	private boolean returning = false;
 	private static final int RETURN_TICK = 15;
 	private static final int MAX_TICKS = 100;
+
+	/** Items being carried by the boomerang (Zelda-style pickup and return) */
+	public ArrayList carriedItems = new ArrayList();
+	private static final int MAX_CARRIED = 5;
 
 	public AC_EntityBoomerang(World world) {
 		super(world);
@@ -36,6 +41,7 @@ public class AC_EntityBoomerang extends Entity {
 		this.ticksInAir++;
 
 		if(this.ticksInAir > MAX_TICKS) {
+			this.dropCarriedItems();
 			this.setEntityDead();
 			return;
 		}
@@ -51,7 +57,8 @@ public class AC_EntityBoomerang extends Entity {
 			double dist = MathHelper.sqrt_double(dx * dx + dy * dy + dz * dz);
 
 			if(dist < 1.5) {
-				// Caught
+				// Caught - deliver carried items to player
+				this.deliverItemsToPlayer();
 				this.setEntityDead();
 				return;
 			}
@@ -97,14 +104,21 @@ public class AC_EntityBoomerang extends Entity {
 				}
 			}
 
-			// Pick up items
-			List items = this.worldObj.getEntitiesWithinAABB(EntityItem.class,
-				this.boundingBox.expand(1.0, 1.0, 1.0));
-			if(items != null && this.thrower != null) {
-				for(int i = 0; i < items.size(); i++) {
-					EntityItem item = (EntityItem)items.get(i);
-					if(item.delayBeforeCanPickup <= 0) {
-						item.onCollideWithPlayer(this.thrower);
+			// Pick up items - carry them instead of giving directly
+			if(this.carriedItems.size() < MAX_CARRIED) {
+				List items = this.worldObj.getEntitiesWithinAABB(EntityItem.class,
+					this.boundingBox.expand(1.0, 1.0, 1.0));
+				if(items != null) {
+					for(int i = 0; i < items.size(); i++) {
+						if(this.carriedItems.size() >= MAX_CARRIED) break;
+						EntityItem entityItem = (EntityItem)items.get(i);
+						if(entityItem.delayBeforeCanPickup <= 0 && !entityItem.isDead) {
+							// Store the item stack and remove the entity from world
+							this.carriedItems.add(entityItem.item.copy());
+							entityItem.setEntityDead();
+							this.worldObj.playSoundAtEntity(this, "random.pop", 0.2F,
+								((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+						}
 					}
 				}
 			}
@@ -114,13 +128,71 @@ public class AC_EntityBoomerang extends Entity {
 		this.worldObj.spawnParticle("crit", this.posX, this.posY, this.posZ, 0.0, 0.0, 0.0);
 	}
 
+	/** Deliver all carried items to the thrower's inventory */
+	private void deliverItemsToPlayer() {
+		if(this.thrower == null) {
+			this.dropCarriedItems();
+			return;
+		}
+		for(int i = 0; i < this.carriedItems.size(); i++) {
+			ItemStack stack = (ItemStack)this.carriedItems.get(i);
+			if(!this.thrower.inventory.addItemStackToInventory(stack)) {
+				// Inventory full - drop the item
+				this.thrower.dropPlayerItem(stack);
+			}
+		}
+		this.carriedItems.clear();
+	}
+
+	/** Drop all carried items at the boomerang's current position */
+	private void dropCarriedItems() {
+		for(int i = 0; i < this.carriedItems.size(); i++) {
+			ItemStack stack = (ItemStack)this.carriedItems.get(i);
+			EntityItem drop = new EntityItem(this.worldObj, this.posX, this.posY, this.posZ, stack);
+			drop.delayBeforeCanPickup = 10;
+			this.worldObj.entityJoinedWorld(drop);
+		}
+		this.carriedItems.clear();
+	}
+
+	public void setEntityDead() {
+		// Drop any remaining carried items before dying
+		if(!this.carriedItems.isEmpty() && !this.worldObj.multiplayerWorld) {
+			this.dropCarriedItems();
+		}
+		super.setEntityDead();
+	}
+
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		nbt.setShort("TicksInAir", (short)this.ticksInAir);
 		nbt.setBoolean("Returning", this.returning);
+
+		// Save carried items
+		NBTTagList itemList = new NBTTagList();
+		for(int i = 0; i < this.carriedItems.size(); i++) {
+			ItemStack stack = (ItemStack)this.carriedItems.get(i);
+			NBTTagCompound itemTag = new NBTTagCompound();
+			stack.writeToNBT(itemTag);
+			itemList.setTag(itemTag);
+		}
+		nbt.setTag("CarriedItems", itemList);
 	}
 
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		this.ticksInAir = nbt.getShort("TicksInAir");
 		this.returning = nbt.getBoolean("Returning");
+
+		// Load carried items
+		this.carriedItems.clear();
+		NBTTagList itemList = nbt.getTagList("CarriedItems");
+		if(itemList != null) {
+			for(int i = 0; i < itemList.tagCount(); i++) {
+				NBTTagCompound itemTag = (NBTTagCompound)itemList.tagAt(i);
+				ItemStack stack = new ItemStack(itemTag);
+				if(stack != null) {
+					this.carriedItems.add(stack);
+				}
+			}
+		}
 	}
 }

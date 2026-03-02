@@ -5,7 +5,7 @@ public class AC_ItemEraser extends Item {
 	public AC_ItemEraser(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acEraser");
+		this.setItemName("eraser");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

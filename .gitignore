@@ -15,3 +15,12 @@ compile-files.txt
 src_files.txt
 TestIconIndex.class
 TestIconIndex.java
+
+# Decompilation / debug artifacts
+*_decompiled.txt
+temp_*.txt
+acbin_terrain.png
+acbin_terrain_extract.png
+lib/terrain_new.png
+lib/terrain_patched.png
+dk_worldrenderer.txt

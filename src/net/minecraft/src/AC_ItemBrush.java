@@ -5,7 +5,7 @@ public class AC_ItemBrush extends Item {
 	public AC_ItemBrush(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acBrush");
+		this.setItemName("brush");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

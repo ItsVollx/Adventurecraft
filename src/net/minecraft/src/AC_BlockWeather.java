@@ -4,7 +4,7 @@ public class AC_BlockWeather extends AC_BlockTrigger {
 
 	public AC_BlockWeather(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acWeather");
+		this.setBlockName("weather");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

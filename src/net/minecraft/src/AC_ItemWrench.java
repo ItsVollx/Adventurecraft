@@ -5,7 +5,7 @@ public class AC_ItemWrench extends Item {
 	public AC_ItemWrench(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acWrench");
+		this.setItemName("wrench");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

@@ -10,7 +10,7 @@ public class AC_ItemCursor extends Item {
 	public AC_ItemCursor(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acCursor");
+		this.setItemName("cursor");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

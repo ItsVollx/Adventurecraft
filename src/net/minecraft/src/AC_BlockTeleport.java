@@ -4,7 +4,7 @@ public class AC_BlockTeleport extends AC_BlockTrigger {
 
 	public AC_BlockTeleport(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acTeleport");
+		this.setBlockName("teleport");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

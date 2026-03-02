@@ -4,7 +4,7 @@ public class AC_BlockMessage extends AC_BlockTrigger {
 
 	public AC_BlockMessage(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acMessage");
+		this.setBlockName("message");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

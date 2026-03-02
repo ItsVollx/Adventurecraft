@@ -6,7 +6,7 @@ public class AC_ItemHookshot extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(256);
-		this.setItemName("acHookshot");
+		this.setItemName("hookshot");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

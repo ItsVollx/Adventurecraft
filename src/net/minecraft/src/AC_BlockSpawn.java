@@ -4,7 +4,7 @@ public class AC_BlockSpawn extends AC_BlockTrigger {
 
 	public AC_BlockSpawn(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acSpawn");
+		this.setBlockName("spawn");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

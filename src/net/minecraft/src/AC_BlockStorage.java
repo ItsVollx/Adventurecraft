@@ -4,7 +4,7 @@ public class AC_BlockStorage extends AC_BlockTrigger {
 
 	public AC_BlockStorage(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acStorage");
+		this.setBlockName("storage");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

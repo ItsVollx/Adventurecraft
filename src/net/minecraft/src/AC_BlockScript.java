@@ -4,7 +4,7 @@ public class AC_BlockScript extends AC_BlockTrigger {
 
 	public AC_BlockScript(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acScript");
+		this.setBlockName("script");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

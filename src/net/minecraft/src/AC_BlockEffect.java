@@ -4,7 +4,7 @@ public class AC_BlockEffect extends AC_BlockTrigger {
 
 	public AC_BlockEffect(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acEffect");
+		this.setBlockName("effect");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

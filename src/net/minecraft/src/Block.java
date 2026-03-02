@@ -21,6 +21,7 @@ public class Block {
 	public static final boolean[] canBlockGrass = new boolean[256];
 	public static final int[] lightValue = new int[256];
 	public static final boolean[] field_28032_t = new boolean[256];
+	public static final int[] subTypes = new int[256];
 	public static final Block stone;
 	public static final BlockGrass grass;
 	public static final Block dirt;
@@ -119,6 +120,7 @@ public class Block {
 	public static final Block trapdoor;
 	public int blockIndexInTexture;
 	public final int blockID;
+	public int textureNum;
 	protected float blockHardness;
 	protected float blockResistance;
 	protected boolean blockConstructorCalled;
@@ -207,6 +209,20 @@ public class Block {
 
 	protected Block setBlockUnbreakable() {
 		this.setHardness(-1.0F);
+		return this;
+	}
+
+	public int getTextureNum() {
+		return this.textureNum;
+	}
+
+	public Block setTextureNum(int var1) {
+		this.textureNum = var1;
+		return this;
+	}
+
+	protected Block setSubTypes(int var1) {
+		subTypes[this.blockID] = var1;
 		return this;
 	}
 

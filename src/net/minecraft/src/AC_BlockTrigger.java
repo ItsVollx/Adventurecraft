@@ -4,6 +4,7 @@ public class AC_BlockTrigger extends BlockContainer implements AC_IBlockTriggera
 
 	protected AC_BlockTrigger(int blockID, int textureIndex, Material material) {
 		super(blockID, textureIndex, material);
+		this.setBlockName("trigger");
 	}
 
 	protected TileEntity getBlockEntity() {

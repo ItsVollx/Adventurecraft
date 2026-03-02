@@ -5,7 +5,7 @@ public class AC_ItemPaintBucket extends Item {
 	public AC_ItemPaintBucket(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acPaintBucket");
+		this.setItemName("paintBucket");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

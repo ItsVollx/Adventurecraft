@@ -6,7 +6,7 @@ public class AC_ItemLantern extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(1200);
-		this.setItemName("acLantern");
+		this.setItemName("lantern");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

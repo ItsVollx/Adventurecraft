@@ -5,7 +5,7 @@ public class AC_BlockTimer extends AC_BlockTrigger {
 	public AC_BlockTimer(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
 		this.setTickOnLoad(true);
-		this.setBlockName("acTimer");
+		this.setBlockName("timer");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

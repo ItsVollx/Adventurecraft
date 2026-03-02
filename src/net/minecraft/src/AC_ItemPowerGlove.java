@@ -6,7 +6,7 @@ public class AC_ItemPowerGlove extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(64);
-		this.setItemName("acPowerGlove");
+		this.setItemName("powerGlove");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

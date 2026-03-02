@@ -7,13 +7,27 @@ Set-Location $workspace
 Write-Host "=== AdventureCraft B1.7.3 Build ===" -ForegroundColor Cyan
 Write-Host ""
 
-# Step 0: Reset vanilla terrain atlas
-Write-Host "0. Resetting vanilla terrain atlas..." -ForegroundColor Yellow
+# Step 0: Reset vanilla atlases
+Write-Host "0. Resetting vanilla atlases..." -ForegroundColor Yellow
 if (Test-Path "lib/terrain.png") {
     Copy-Item "lib/terrain.png" "bin/terrain.png" -Force
     Write-Host "   bin/terrain.png restored from lib/terrain.png" -ForegroundColor Green
 } else {
     Write-Host "   Warning: lib/terrain.png not found" -ForegroundColor Yellow
+}
+if (Test-Path "lib/items.png") {
+    New-Item -ItemType Directory -Path "bin/gui" -Force -ErrorAction SilentlyContinue > $null
+    Copy-Item "lib/items.png" "bin/gui/items.png" -Force
+    Write-Host "   bin/gui/items.png restored from lib/items.png" -ForegroundColor Green
+} else {
+    Write-Host "   Warning: lib/items.png not found" -ForegroundColor Yellow
+}
+if (Test-Path "lib/lang") {
+    New-Item -ItemType Directory -Path "bin/lang" -Force -ErrorAction SilentlyContinue > $null
+    Copy-Item "lib/lang/*" "bin/lang/" -Force
+    Write-Host "   bin/lang/ restored from lib/lang/" -ForegroundColor Green
+} else {
+    Write-Host "   Warning: lib/lang/ not found" -ForegroundColor Yellow
 }
 
 # Step 1: Setup build directory

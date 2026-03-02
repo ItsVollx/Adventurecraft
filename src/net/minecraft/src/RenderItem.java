@@ -39,7 +39,8 @@ public class RenderItem extends Render {
 		float var18;
 		if(var10.itemID < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[var10.itemID].getRenderType())) {
 			GL11.glRotatef(var12, 0.0F, 1.0F, 0.0F);
-			this.loadTexture("/terrain.png");
+			int texNumDrop = Block.blocksList[var10.itemID].getTextureNum();
+			this.loadTexture(texNumDrop == 0 ? "/terrain.png" : "/terrain" + texNumDrop + ".png");
 			float var28 = 0.25F;
 			if(!Block.blocksList[var10.itemID].renderAsNormalBlock() && var10.itemID != Block.stairSingle.blockID && Block.blocksList[var10.itemID].getRenderType() != 16) {
 				var28 = 0.5F;
@@ -63,7 +64,8 @@ public class RenderItem extends Render {
 			GL11.glScalef(0.5F, 0.5F, 0.5F);
 			int var14 = var10.getIconIndex();
 			if(var10.itemID < 256) {
-				this.loadTexture("/terrain.png");
+				int texNumItem = Block.blocksList[var10.itemID] != null ? Block.blocksList[var10.itemID].getTextureNum() : 0;
+				this.loadTexture(texNumItem == 0 ? "/terrain.png" : "/terrain" + texNumItem + ".png");
 			} else {
 				this.loadTexture("/gui/items.png");
 			}
@@ -117,7 +119,8 @@ public class RenderItem extends Render {
 	public void drawItemIntoGui(FontRenderer var1, RenderEngine var2, int var3, int var4, int var5, int var6, int var7) {
 		float var11;
 		if(var3 < 256 && RenderBlocks.renderItemIn3d(Block.blocksList[var3].getRenderType())) {
-			var2.bindTexture(var2.getTexture("/terrain.png"));
+			int texNum = Block.blocksList[var3].getTextureNum();
+			var2.bindTexture(var2.getTexture(texNum == 0 ? "/terrain.png" : "/terrain" + texNum + ".png"));
 			Block var14 = Block.blocksList[var3];
 			GL11.glPushMatrix();
 			GL11.glTranslatef((float)(var6 - 2), (float)(var7 + 3), -3.0F);
@@ -142,7 +145,8 @@ public class RenderItem extends Render {
 		} else if(var5 >= 0) {
 			GL11.glDisable(GL11.GL_LIGHTING);
 			if(var3 < 256) {
-				var2.bindTexture(var2.getTexture("/terrain.png"));
+				int texNum2d = Block.blocksList[var3] != null ? Block.blocksList[var3].getTextureNum() : 0;
+				var2.bindTexture(var2.getTexture(texNum2d == 0 ? "/terrain.png" : "/terrain" + texNum2d + ".png"));
 			} else {
 				var2.bindTexture(var2.getTexture("/gui/items.png"));
 			}

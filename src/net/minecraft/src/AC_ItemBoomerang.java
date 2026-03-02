@@ -6,7 +6,7 @@ public class AC_ItemBoomerang extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(128);
-		this.setItemName("acBoomerang");
+		this.setItemName("boomerang");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

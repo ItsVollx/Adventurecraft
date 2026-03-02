@@ -7,7 +7,7 @@ public class AC_ItemRifle extends Item {
 		super(itemId);
 		this.maxStackSize = 1;
 		this.setMaxDamage(MAX_AMMO);
-		this.setItemName("acRifle");
+		this.setItemName("rifle");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

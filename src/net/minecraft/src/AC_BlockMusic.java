@@ -4,7 +4,7 @@ public class AC_BlockMusic extends AC_BlockTrigger {
 
 	public AC_BlockMusic(int blockID, int textureIndex) {
 		super(blockID, textureIndex, Material.iron);
-		this.setBlockName("acMusic");
+		this.setBlockName("music");
 	}
 
 	public void onTriggerActivated(World world, int x, int y, int z) {

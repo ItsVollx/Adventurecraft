@@ -5,7 +5,7 @@ public class AC_ItemBomb extends Item {
 	public AC_ItemBomb(int itemId) {
 		super(itemId);
 		this.maxStackSize = 16;
-		this.setItemName("acBomb");
+		this.setItemName("bomb");
 	}
 
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {

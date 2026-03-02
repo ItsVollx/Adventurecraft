@@ -5,7 +5,7 @@ public class AC_ItemPaste extends Item {
 	public AC_ItemPaste(int itemId) {
 		super(itemId);
 		this.maxStackSize = 1;
-		this.setItemName("acPaste");
+		this.setItemName("paste");
 	}
 
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side) {

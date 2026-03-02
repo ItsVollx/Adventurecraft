@@ -64,6 +64,22 @@ public abstract class GuiContainer extends GuiScreen {
 		this.drawGuiContainerForegroundLayer();
 		if(var12.getItemStack() == null && var6 != null && var6.getHasStack()) {
 			String var13 = ("" + StringTranslate.getInstance().translateNamedKey(var6.getStack().getItemName())).trim();
+			if(var13.length() == 0) {
+				// Fallback: use raw item name without prefix, capitalize first letter
+				String rawName = var6.getStack().getItemName();
+				if(rawName != null && rawName.length() > 0) {
+					if(rawName.startsWith("item.")) {
+						var13 = rawName.substring(5);
+					} else if(rawName.startsWith("tile.")) {
+						var13 = rawName.substring(5);
+					} else {
+						var13 = rawName;
+					}
+					if(var13.length() > 0) {
+						var13 = Character.toUpperCase(var13.charAt(0)) + var13.substring(1);
+					}
+				}
+			}
 			if(var13.length() > 0) {
 				var9 = var1 - var4 + 12;
 				var10 = var2 - var5 - 12;
