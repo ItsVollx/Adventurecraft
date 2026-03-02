@@ -24,7 +24,7 @@ public class AC_BlockChair extends AC_BlockSolid {
 	}
 
 	public int getRenderType() {
-		return 0; // Cube for now (type 34 deferred)
+		return 34;
 	}
 
 	public void incrementColor(World world, int x, int y, int z) {
