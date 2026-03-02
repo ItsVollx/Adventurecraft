@@ -8,6 +8,10 @@ public class AC_EntityHook extends Entity {
 	private static final int MAX_TICKS = 100;
 	private static final double PULL_SPEED = 0.8;
 
+	public EntityPlayer getThrower() {
+		return this.thrower;
+	}
+
 	public AC_EntityHook(World world) {
 		super(world);
 		this.setSize(0.25F, 0.25F);

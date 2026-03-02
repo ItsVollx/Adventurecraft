@@ -38,7 +38,7 @@ public class AC_Mod {
 		npcRenderer.setRenderManager(RenderManager.instance);
 		RenderManager.instance.entityRenderMap.put(AC_EntityNPC.class, npcRenderer);
 
-		Render hookRenderer = new AC_RenderBoomerang();
+		Render hookRenderer = new AC_RenderHook();
 		hookRenderer.setRenderManager(RenderManager.instance);
 		RenderManager.instance.entityRenderMap.put(AC_EntityHook.class, hookRenderer);
 
